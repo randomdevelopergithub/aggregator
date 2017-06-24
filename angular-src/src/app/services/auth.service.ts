@@ -62,10 +62,8 @@ export class AuthService {
   }
 
   prepEndpoint(endpoint){  
-    if(this.isDev){
-      return 'http://localhost:3000/' + endpoint;
-    } else {
+
       return endpoint;
-    }
+    
   }
 }
