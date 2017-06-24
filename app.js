@@ -55,6 +55,7 @@ app.get('/', (req, res) => {
   res.send('Invalid Endpoint yup yup');
 });
 
+// send everything to index.html (excluding our defined routes)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
