@@ -750,7 +750,12 @@ var AuthService = (function () {
         localStorage.clear();
     };
     AuthService.prototype.prepEndpoint = function (endpoint) {
-        return endpoint;
+        if (this.isDev) {
+            return 'http://localhost:3000/' + endpoint;
+        }
+        else {
+            return endpoint;
+        }
     };
     return AuthService;
 }());
