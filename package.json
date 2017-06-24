@@ -1,5 +1,5 @@
 {
-  "name": "newsscanner",
+  "name": "aggregator",
   "version": "1.0.0",
   "description": "aggregator app",
   "main": "app.js",
