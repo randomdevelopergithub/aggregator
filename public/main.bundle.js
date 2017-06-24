@@ -706,7 +706,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthService = (function () {
     function AuthService(http) {
         this.http = http;
-        this.isDev = true; // Change to false before deployment
+        this.isDev = false; // Change to false before deployment
     }
     AuthService.prototype.registerUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
@@ -750,12 +750,7 @@ var AuthService = (function () {
         localStorage.clear();
     };
     AuthService.prototype.prepEndpoint = function (endpoint) {
-        if (this.isDev) {
-            return 'http://localhost:3000/' + endpoint;
-        }
-        else {
-            return endpoint;
-        }
+        return endpoint;
     };
     return AuthService;
 }());
