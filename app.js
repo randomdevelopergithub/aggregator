@@ -35,6 +35,18 @@ const articles = require('./routes/articles');
 // Port Number
 const port = process.env.PORT || 8080;
 
+/*
+info on app.use
+
+https://stackoverflow.com/questions/11321635/nodejs-express-what-is-app-use
+
+app.use- used to specify processing/manipulation to be carried out on a http request
+
+app.use(<middleware>)- because there is no route included with this call, the middleware will act on all route requests.
+
+app.use(<route>, <middleware>) (e.g. app.use('/users', users))- because there is route included with this call, middleware will act only on requests to that route 
+*/
+
 // CORS Middleware
 app.use(cors());
 
@@ -55,27 +67,9 @@ app.use('/frontpage', articles);
 
 //---------------------------------------------
 //begin collection job
-var connectionString = "mongodb://admin:admin@ds137882.mlab.com:37882/aggregator_database";
-var agenda = new Agenda({db: {address: connectionString, collection: "retrieve_articles"}});
- 
-agenda.define('retrieve articles', function(job, done) {
-  console.log('cool!');
-  console.log(job);
-  
-  // here pull articles from all in news vendor domain array.
-  // save articles by domain in db
-  
-  done();
-});
- 
-agenda.on('ready', function() {
-  agenda.every('10 seconds', 'retrieve articles');
- 
-  agenda.start();
-});
-
-console.log('Wait 10 seconds...');
-//------------------------------------------
+var agenda = new Agenda({db: {address: config.database, collection: "retrieve_articles"}});
+require('./jobs/collect_articles')(agenda);
+//------------------------------------------------
 
 // Index Route
 app.get('/', (req, res) => {
