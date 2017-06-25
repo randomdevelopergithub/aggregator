@@ -2,7 +2,6 @@ const Article = require('../models/article.js');
 const vendors = require('../config/vendors.js');
 const request = require('request');
 const cheerio = require('cheerio');
-const 
     
 module.exports = function(agenda) {
     agenda.define('retrieve articles', function(job, done) {
